@@ -1,6 +1,6 @@
 {
   "name": "ember-ui-sortable",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Ember component for interacting with jQuery UI's Sortable module.",
   "directories": {
     "doc": "doc",
