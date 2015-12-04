@@ -11,7 +11,7 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "https://github.com/ToddSmithSalter/ember-ui-sortable",
+  "repository": "https://github.com/12StarsMedia/ember-ui-sortable",
   "engines": {
     "node": ">= 0.10.0"
   },
