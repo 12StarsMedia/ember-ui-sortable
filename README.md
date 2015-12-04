@@ -1,26 +1,92 @@
-# Ember-ui-sortable
+# ember-ui-sortable
 
-This README outlines the details of collaborating on this Ember addon.
+[![Build Status](https://travis-ci.org/ToddSmithSalter/ember-ui-sortable.svg?branch=master)](https://travis-ci.org/ToddSmithSalter/ember-ui-sortable)
+
+An [Ember](http://emberjs.com) 1.13+ component for [jQuery UI's Sortable Widget](http://jqueryui.com/sortable/). This addon is a fork of [ivy-sortable](https://github.com/IvyApp/ivy-sortable).
+
 
 ## Installation
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+As an [ember-cli](http://www.ember-cli.com) addon:
 
-## Running
+```sh
+ember install ember-ui-sortable
+```
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+## Usage
 
-## Running Tests
+Use the `ui-sortable` component block to iterate over the wrapped content:
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+```handlebars
+{{#ui-sortable content=people as |person|}}
+  <li>Hi there, {{person.name}}</li>
+{{/ui-sortable}}
+```
 
-## Building
+This will output a sortable list, and dragging and dropping items will reorder them in the passed in `content` array. To handle and action on the parent controller or component, you can bind an action to the `moved` property. The `moved` action will return three arguments, the object being moved, the previous index, and the new index.
 
-* `ember build`
+```handlebars
+{{#ui-sortable content=people moved=(action movedPerson) as |person|}}
+  <li>Hi there, {{person.name}}</li>
+{{/ui-sortable}}
+```
 
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+Handle this action like so...
+
+```js
+// controller|component.js
+export default {
+  actions: {
+    movedPerson: function(person, oldIndex, newIndex) {
+      // do rad stuff...ajax or something
+    }
+  }
+}
+```
+
+## Options
+
+The following [jQuery UI Sortable options](http://api.jqueryui.com/sortable/#options) are supported:
+
+  * `axis`
+  * `containment`
+  * `cursorAt`
+  * `cursor`
+  * `delay`
+  * `disabled`
+  * `distance`
+  * `forceHelperSize`
+  * `forcePlaceholderSize`
+  * `grid`
+  * `handle`
+  * `helper`
+  * `opacity`
+  * `placeholder`
+  * `revert`
+  * `scrollSensitivity`
+  * `scrollSpeed`
+  * `scroll`
+  * `tolerance`
+  * `zIndex`
+
+## TODO:
+
+- [ ] Demo app
+
+## Contributing
+
+Fork this repo, make a new branch, and send a pull request. Make sure your change is tested or it won't be merged.
+
+To run tests:
+
+```sh
+git clone # <this repo>
+npm install
+npm test
+```
+
+Or, to start a test server that continually runs (for development):
+
+```sh
+ember test --server
+```
