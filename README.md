@@ -1,6 +1,6 @@
 # ember-ui-sortable
 
-[![Build Status](https://travis-ci.org/ToddSmithSalter/ember-ui-sortable.svg?branch=master)](https://travis-ci.org/ToddSmithSalter/ember-ui-sortable)
+[![Build Status](https://travis-ci.org/12StarsMedia/ember-ui-sortable.svg?branch=master)](https://travis-ci.org/12StarsMedia/ember-ui-sortable)
 
 An [Ember](http://emberjs.com) 1.13+ component for [jQuery UI's Sortable Widget](http://jqueryui.com/sortable/). This addon is a fork of [ivy-sortable](https://github.com/IvyApp/ivy-sortable).
 
