@@ -26,7 +26,7 @@ Use the `ui-sortable` component block to iterate over the wrapped content:
 This will output a sortable list, and dragging and dropping items will reorder them in the passed in `content` array. To handle and action on the parent controller or component, you can bind an action to the `moved` property. The `moved` action will return three arguments, the object being moved, the previous index, and the new index.
 
 ```handlebars
-{{#ui-sortable content=people moved=(action movedPerson) as |person|}}
+{{#ui-sortable content=people moved=(action "movedPerson") as |person|}}
   <li>Hi there, {{person.name}}</li>
 {{/ui-sortable}}
 ```
