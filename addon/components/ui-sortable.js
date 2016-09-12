@@ -28,6 +28,8 @@ export default Ember.Component.extend({
     'handle',
     'helper',
     'opacity',
+    'out',
+    'over',
     'placeholder',
     'revert',
     'scroll',
@@ -44,7 +46,12 @@ export default Ember.Component.extend({
   initSortable: on('didInsertElement', function () {
     let opts = {};
 
-    ['start', 'stop'].forEach((callback) => {
+    let evts = ['start', 'stop'];
+
+    this.out && evts.push('out');
+    this.over && evts.push('over');
+
+    evts.forEach((callback) => {
       opts[callback] = run.bind(this, callback);
     });
 
