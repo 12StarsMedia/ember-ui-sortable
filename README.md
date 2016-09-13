@@ -71,7 +71,13 @@ The following [jQuery UI Sortable options](http://api.jqueryui.com/sortable/#opt
 
 ## TODO:
 
-- [ ] Demo app
+- [x] Demo app
+
+## Contributors
+
+- [Todd Smith-Salter](https://github.com/ToddSmithSalter)
+- [Nick Schot](https://github.com/nickschot)
+- [Andrew Branch](https://github.com/andrewbranch)
 
 ## Contributing
 
