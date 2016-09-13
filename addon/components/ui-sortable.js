@@ -46,10 +46,7 @@ export default Ember.Component.extend({
   initSortable: on('didInsertElement', function () {
     let opts = {};
 
-    let evts = ['start', 'stop'];
-
-    this.out && evts.push('out');
-    this.over && evts.push('over');
+    let evts = ['start', 'stop', 'out', 'over'];
 
     evts.forEach((callback) => {
       opts[callback] = run.bind(this, callback);
@@ -68,16 +65,22 @@ export default Ember.Component.extend({
 
   move(oldIndex, newIndex) {
     let content = this.get('content');
+    let moved = this.get('moved');
 
-    if (content) {
+    if (content && moved) {
       let item = content.objectAt(oldIndex);
-
-      //TODO: think about this, maybe as an option? Right now it does not always seem to work correctly
-      //content.removeAt(oldIndex);
-      //content.insertAt(newIndex, item);
-
-      this.attrs.moved(item, oldIndex, newIndex);
+      return moved(item, oldIndex, newIndex);
     }
+  },
+
+  over(event, ui) {
+    console.log(event, ui);
+    // Do stuff...
+  },
+
+  out(event,ui) {
+    console.log(event, ui);
+    // Do stuff...
   },
 
   start(event, ui) {
