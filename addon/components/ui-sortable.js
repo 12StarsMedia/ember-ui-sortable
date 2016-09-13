@@ -84,10 +84,15 @@ export default Ember.Component.extend({
   },
 
   stop(event, ui) {
-    const oldIndex = ui.item.data('oldIndex');
-    const newIndex = ui.item.index();
+    if(ui.item.hasClass('draggable-item')){
+      ui.item.remove();//TODO: implement correct item display
+    } else {
 
-    this.move(oldIndex, newIndex);
+      const oldIndex = ui.item.data('oldIndex');
+      const newIndex = ui.item.index();
+
+      this.move(oldIndex, newIndex);
+    }
   },
 
   _bindSortableOption: function(key) {
