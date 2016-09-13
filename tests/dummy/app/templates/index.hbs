@@ -1,0 +1,8 @@
+{{#ui-sortable
+  content=model
+  moved=(action "contentMoved")
+  class="list-group"
+  as |item|
+}}
+  <li class="list-group-item">{{item}}</li>
+{{/ui-sortable}}
