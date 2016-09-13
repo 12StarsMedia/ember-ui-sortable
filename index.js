@@ -11,8 +11,10 @@ module.exports = {
     app.import(app.bowerDirectory + '/jquery-ui/ui/safe-active-element.js');
     app.import(app.bowerDirectory + '/jquery-ui/ui/safe-blur.js');
     app.import(app.bowerDirectory + '/jquery-ui/ui/scroll-parent.js');
+    app.import(app.bowerDirectory + '/jquery-ui/ui/plugin.js');
     app.import(app.bowerDirectory + '/jquery-ui/ui/widget.js');
     app.import(app.bowerDirectory + '/jquery-ui/ui/widgets/mouse.js');
+    app.import(app.bowerDirectory + '/jquery-ui/ui/widgets/draggable.js');
     app.import(app.bowerDirectory + '/jquery-ui/ui/widgets/sortable.js');
   }
 };
