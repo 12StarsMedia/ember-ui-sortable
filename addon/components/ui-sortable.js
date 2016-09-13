@@ -70,7 +70,7 @@ export default Ember.Component.extend({
     let content = this.get('content');
 
     if (content) {
-      var item = content.objectAt(oldIndex);
+      let item = content.objectAt(oldIndex);
 
       content.removeAt(oldIndex);
       content.insertAt(newIndex, item);
@@ -85,9 +85,12 @@ export default Ember.Component.extend({
 
   stop(event, ui) {
     if(ui.item.hasClass('draggable-item')){
-      ui.item.remove();//TODO: implement correct item display
-    } else {
+      let newIndex = ui.item.index();
+      let item = ui.item;
 
+      item.detach();
+      this.attrs.inserted(item, newIndex);
+    } else {
       const oldIndex = ui.item.data('oldIndex');
       const newIndex = ui.item.index();
 
