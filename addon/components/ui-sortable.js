@@ -72,8 +72,9 @@ export default Ember.Component.extend({
     if (content) {
       let item = content.objectAt(oldIndex);
 
-      content.removeAt(oldIndex);
-      content.insertAt(newIndex, item);
+      //TODO: think about this, maybe as an option? Right now it does not always seem to work correctly
+      //content.removeAt(oldIndex);
+      //content.insertAt(newIndex, item);
 
       this.attrs.moved(item, oldIndex, newIndex);
     }
