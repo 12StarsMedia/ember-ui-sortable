@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "ember build",
+    "deploy": "ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\"; git push; git checkout -",
     "start": "ember server",
     "test": "ember try:each"
   },
@@ -49,6 +50,7 @@
     "ember-cli-htmlbars": "^1.0.3"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
+    "configPath": "tests/dummy/config",
+    "demoURL": "https://12starsmedia.github.io/ember-ui-sortable/"
   }
 }
