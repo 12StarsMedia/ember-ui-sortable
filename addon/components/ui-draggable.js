@@ -49,9 +49,9 @@ export default Ember.Component.extend({
   initDraggable: on('didInsertElement', function () {
     let opts = {};
 
-    //['start', 'stop'].forEach((callback) => {
-    //  opts[callback] = run.bind(this, callback);
-    //});
+    ['start'].forEach((callback) => {
+      opts[callback] = run.bind(this, callback);
+    });
 
     this.$().children().draggable(opts);
 
@@ -64,29 +64,9 @@ export default Ember.Component.extend({
     run.scheduleOnce('afterRender', this, this._refreshDraggable);
   }),
 
-/*  move(oldIndex, newIndex) {
-    let content = this.get('content');
-
-    if (content) {
-      var item = content.objectAt(oldIndex);
-
-      content.removeAt(oldIndex);
-      content.insertAt(newIndex, item);
-
-      this.attrs.moved(item, oldIndex, newIndex);
-    }
-  },
-
   start(event, ui) {
-    ui.item.data('oldIndex', ui.item.index());
+    ui.helper.addClass('draggable-item');
   },
-
-  stop(event, ui) {
-    const oldIndex = ui.item.data('oldIndex');
-    const newIndex = ui.item.index();
-
-    this.move(oldIndex, newIndex);
-  },*/
 
   _bindDraggableOption: function(key) {
     this.addObserver(key, this, this._optionDidChange);
