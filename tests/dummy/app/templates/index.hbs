@@ -32,3 +32,25 @@ as |item|
 }}
   <li class="list-group-item">{{item}}</li>
 {{/ui-sortable}}
+
+<hr>
+
+{{#ui-sortable
+  connectWith=".connected-list-group-bottom"
+  content=model.sortable
+  moved=(action "contentMoved")
+  class="list-group connected-list-group-top"
+as |item|
+}}
+    <li class="list-group-item">{{item}}</li>
+{{/ui-sortable}}
+
+{{#ui-sortable
+  connectWith=".connected-list-group-top"
+  content=model.sortable
+  moved=(action "contentMoved")
+  class="list-group connected-list-group-bottom"
+as |item|
+}}
+    <li class="list-group-item">{{item}}</li>
+{{/ui-sortable}}

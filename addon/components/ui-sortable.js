@@ -16,6 +16,7 @@ export default Ember.Component.extend({
   uiOptions: [
     'axis',
     'appendTo',
+    'connectWith',
     'containment',
     'cursor',
     'cursorAt',
