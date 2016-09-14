@@ -11,8 +11,7 @@ export default Ember.Component.extend({
   layout: layout,
   disabled: false,
 
-  tagName: 'ul',
-  classNames: ['toolbar-item-list row'],
+  tagName: 'div',
 
   uiOptions: [
     'addClasses',
@@ -43,7 +42,7 @@ export default Ember.Component.extend({
   ],
 
   destroyDraggable: on('willDestroyElement', function() {
-    this.$().children().draggable('destroy');
+    this.$().draggable('destroy');
   }),
 
   initDraggable: on('didInsertElement', function () {
@@ -53,7 +52,7 @@ export default Ember.Component.extend({
       opts[callback] = run.bind(this, callback);
     });
 
-    this.$().children().draggable(opts);
+    this.$().draggable(opts);
 
     this.get('uiOptions').forEach((option) => {
       this._bindDraggableOption(option);
@@ -81,11 +80,11 @@ export default Ember.Component.extend({
   },
 
   _optionDidChange(sender, key) {
-    this.$().children().draggable('option', key, this.get(key));
+    this.$().draggable('option', key, this.get(key));
   },
 
   _refreshDraggable() {
     if (this.isDestroying) { return; }
-    this.$().children().draggable('refresh');
+    this.$().draggable('refresh');
   }
 });
