@@ -1,8 +1,34 @@
 {{#ui-sortable
-  content=model
+  content=model.sortable
   moved=(action "contentMoved")
   class="list-group"
   as |item|
+}}
+  <li class="list-group-item">{{item}}</li>
+{{/ui-sortable}}
+
+<hr>
+
+<ul class="list-group">
+  {{#ui-draggable
+    connectToSortable=".draggable-target"
+    revert="invalid"
+    helper="clone"
+    appendTo="body"
+    tagName="li"
+    classNames="list-group-item"
+  }}
+    Drag me to the list below!
+  {{/ui-draggable}}
+</ul>
+<br>
+
+{{#ui-sortable
+  content=model.draggable
+  moved=(action "contentMoved")
+  class="list-group draggable-target"
+  inserted=(action "addElement")
+as |item|
 }}
   <li class="list-group-item">{{item}}</li>
 {{/ui-sortable}}
