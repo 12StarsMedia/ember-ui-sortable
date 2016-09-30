@@ -29,8 +29,6 @@ export default Ember.Component.extend({
     'handle',
     'helper',
     'opacity',
-    'out',
-    'over',
     'placeholder',
     'revert',
     'scroll',
@@ -75,13 +73,15 @@ export default Ember.Component.extend({
   },
 
   over(event, ui) {
-    console.log(event, ui);
-    // Do stuff...
+    if(this.attrs.over){
+      this.attrs.over(event, ui);
+    }
   },
 
   out(event,ui) {
-    console.log(event, ui);
-    // Do stuff...
+    if(this.attrs.out){
+      this.attrs.out(event, ui);
+    }
   },
 
   start(event, ui) {
