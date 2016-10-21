@@ -1,7 +1,8 @@
 {{#ui-sortable
   content=model.sortable
   moved=(action "contentMoved")
-  class="list-group"
+  inserted=(action "addElement")
+  class="list-group draggable-target"
   as |item|
 }}
   <li class="list-group-item">{{item}}</li>
@@ -18,20 +19,9 @@
     tagName="li"
     classNames="list-group-item"
   }}
-    Drag me to the list below!
+    I can be dragged into the list above!
   {{/ui-draggable}}
 </ul>
-<br>
-
-{{#ui-sortable
-  content=model.draggable
-  moved=(action "contentMoved")
-  class="list-group draggable-target"
-  inserted=(action "addElement")
-as |item|
-}}
-  <li class="list-group-item">{{item}}</li>
-{{/ui-sortable}}
 
 <hr>
 
