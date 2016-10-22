@@ -59,6 +59,13 @@ export default {
 }
 ```
 
+Add a `connectWith` option to allow dragging items _between_ lists! Make a Trello clone, or something. Be awesome.
+
+```js
+{{#ui-sortable class="connected" connectWith=".connected"}}...{{/ui-sortable}}
+{{#ui-sortable class="connected" connectWith=".connected"}}...{{/ui-sortable}}
+```
+
 #### Sortable Options
 
 The following [jQuery UI Sortable options](http://api.jqueryui.com/sortable/#options) are supported:
@@ -96,9 +103,20 @@ Use the `ui-draggable` component block to wrap something else and make it dragga
 {{/ui-draggable}}
 ```
 
+Add an optional `connectToSortable` property to allow dragging this element to a `ui-sortable` list. #winning.
+
+```handlebars
+{{#ui-draggable connectToSortable=".draggable-target"}}
+  <li>Hi there, {{person.name}}</li>
+{{/ui-draggable}}
+
+{{#ui-sortable class="draggable-target"}}...{{/ui-sortable}}
+```
+
+
 #### Draggable Options
 
-The following [jQuery UI Sortable options](http://api.jqueryui.com/sortable/#options) are supported:
+The following [jQuery UI Draggable options](http://api.jqueryui.com/draggable/#options) are supported:
 
   * `addClasses`
   * `axis`
