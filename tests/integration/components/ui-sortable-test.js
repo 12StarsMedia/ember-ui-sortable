@@ -31,7 +31,7 @@ test('should render the template for each item in an array', function(assert) {
   assert.equal(this.$('li').text(), 'HanLukeLeia');
 });
 
-test('should update the component is content is replaced', function(assert) {
+test('should update the component if content is replaced', function(assert) {
   this.set('people', people);
 
   this.render(hbs`
@@ -102,57 +102,47 @@ test('should update the component if an item is replaced', function(assert) {
   assert.equal(this.$('li').text(), 'FinnLukeLeia');
 });
 
-test('should update the content if an item is dragged', function(assert) {
+test('should send the content if an item is dragged', function(assert) {
+  assert.expect(3);
   this.set('people', people);
-  this.set('moved', () => assert.ok(true) );
 
-  this.render(hbs`
-    {{#ui-sortable content=people moved=(action moved) as |item|}}
-      <li>{{item.name}}</li>
-    {{/ui-sortable}}
-  `);
-
-  this.$('li:eq(0)').simulate('drag', { dy: 22 });
-  assert.equal(this.$('li').length, 3);
-  assert.equal(this.$('li').text(), 'LukeHanLeia');
-  assert.deepEqual(people.mapBy('name'), ['Luke', 'Han', 'Leia']);
-});
-
-test('should become disabled if the disabled attribute is true', function(assert) {
-  this.set('people', people);
-  this.set('moved', () => assert.ok(true) );
-  this.set('disabled', true);
-
-  this.render(hbs`
-    {{#ui-sortable content=people moved=(action moved) disabled=disabled as |item|}}
-      <li>{{item.name}}</li>
-    {{/ui-sortable}}
-  `);
-
-  this.$('li:eq(0)').simulate('drag', { dy: 22 });
-  assert.equal(this.$('li').text(), 'HanLukeLeia', 'Setting disabled to true disables dragging');
-  assert.deepEqual(people.mapBy('name'), ['Han', 'Luke', 'Leia']);
-
-  this.set('disabled', false);
-  this.$('li:eq(0)').simulate('drag', { dy: 22 });
-  assert.equal(this.$('li').text(), 'LukeHanLeia', 'Setting disabled to false enables dragging');
-  assert.deepEqual(people.mapBy('name'), ['Luke', 'Han', 'Leia']);
-});
-
-test('should trigger moved action after successful drag', function(assert) {
-  this.set('people', people);
-  this.set('moved', (item, oldIndex, newIndex) => {
-    assert.strictEqual(item, people.objectAt(newIndex));
+  this.on('moved', (item, oldIndex, newIndex) => {
+    assert.deepEqual(item, { name: "Han" });
     assert.equal(oldIndex, 0);
     assert.equal(newIndex, 1);
   });
 
   this.render(hbs`
-    {{#ui-sortable content=people disabled=disabled moved=(action moved) as |item|}}
+    {{#ui-sortable content=people moved=(action "moved") as |item|}}
       <li>{{item.name}}</li>
     {{/ui-sortable}}
   `);
 
+  this.$('li:eq(0)').simulate('drag', { dy: 22 });
+});
+
+test('should become disabled if the disabled attribute is true', function(assert) {
+  assert.expect(3);
+  this.set('people', people);
+  this.on('moved', (item, oldIndex, newIndex) => {
+    if (this.get('disabled')) {
+      assert.equal(true); // This shouldn't pass
+    } else {
+      assert.deepEqual(item, { name: "Han" });
+      assert.equal(oldIndex, 0);
+      assert.equal(newIndex, 1);
+    }
+  });
+  this.set('disabled', true);
+
+  this.render(hbs`
+    {{#ui-sortable content=people moved=(action "moved") disabled=disabled as |item|}}
+      <li>{{item.name}}</li>
+    {{/ui-sortable}}
+  `);
+
+  this.$('li:eq(0)').simulate('drag', { dy: 22 });
+  this.set('disabled', false);
   this.$('li:eq(0)').simulate('drag', { dy: 22 });
 });
 

@@ -1,8 +1,53 @@
-{{#ui-sortable
-  content=model
-  moved=(action "contentMoved")
-  class="list-group"
-  as |item|
-}}
-  <li class="list-group-item">{{item}}</li>
-{{/ui-sortable}}
+<div class="row">
+  <div class="col-sm-6">
+    <h3>Sortable list with additional draggable</h3>
+    {{#ui-sortable
+      content=draggableList
+      moved=(action "draggableMoved")
+      inserted=(action "addToDraggableList")
+      class="list-group draggable-target"
+      as |item|
+    }}
+      <li class="list-group-item">{{item}}</li>
+    {{/ui-sortable}}
+
+    <hr>
+
+    {{#if draggableItem}}
+      <ul class="list-group">
+        {{#ui-draggable
+          connectToSortable=".draggable-target"
+          revert="invalid"
+          helper="clone"
+          appendTo="body"
+          tagName="li"
+          classNames="list-group-item"
+        }}
+          {{draggableItem}}
+        {{/ui-draggable}}
+      </ul>
+    {{/if}}
+  </div>
+  <div class="col-sm-6">
+    <h3>Connected sortable lists</h3>
+    {{#ui-sortable
+      connectWith=".connected-list-group-bottom"
+      content=connectedListOne
+      moved=(action "contentMovedToOne")
+      class="list-group connected-list-group-top"
+      as |item|
+    }}
+        <li class="list-group-item">{{item}}</li>
+    {{/ui-sortable}}
+
+    {{#ui-sortable
+      connectWith=".connected-list-group-top"
+      content=connectedListTwo
+      moved=(action "contentMovedToTwo")
+      class="list-group connected-list-group-bottom"
+      as |item|
+    }}
+        <li class="list-group-item">{{item}}</li>
+    {{/ui-sortable}}
+  </div>
+</div>

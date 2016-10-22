@@ -15,6 +15,8 @@ export default Ember.Component.extend({
 
   uiOptions: [
     'axis',
+    'appendTo',
+    'connectWith',
     'containment',
     'cursor',
     'cursorAt',
@@ -43,7 +45,9 @@ export default Ember.Component.extend({
   initSortable: on('didInsertElement', function () {
     let opts = {};
 
-    ['start', 'stop'].forEach((callback) => {
+    let evts = ['start', 'stop', 'out', 'over'];
+
+    evts.forEach((callback) => {
       opts[callback] = run.bind(this, callback);
     });
 
@@ -60,14 +64,23 @@ export default Ember.Component.extend({
 
   move(oldIndex, newIndex) {
     let content = this.get('content');
+    let moved = this.get('moved');
 
-    if (content) {
-      var item = content.objectAt(oldIndex);
+    if (content && moved) {
+      let item = content.objectAt(oldIndex);
+      return moved(item, oldIndex, newIndex);
+    }
+  },
 
-      content.removeAt(oldIndex);
-      content.insertAt(newIndex, item);
+  over(event, ui) {
+    if(this.attrs.over){
+      this.attrs.over(event, ui);
+    }
+  },
 
-      this.attrs.moved(item, oldIndex, newIndex);
+  out(event,ui) {
+    if(this.attrs.out){
+      this.attrs.out(event, ui);
     }
   },
 
@@ -76,10 +89,18 @@ export default Ember.Component.extend({
   },
 
   stop(event, ui) {
-    const oldIndex = ui.item.data('oldIndex');
-    const newIndex = ui.item.index();
+    if(ui.item.hasClass('draggable-item')){
+      let newIndex = ui.item.index();
+      let item = ui.item;
 
-    this.move(oldIndex, newIndex);
+      item.detach();
+      this.attrs.inserted(item, newIndex);
+    } else {
+      const oldIndex = ui.item.data('oldIndex');
+      const newIndex = ui.item.index();
+
+      this.move(oldIndex, newIndex);
+    }
   },
 
   _bindSortableOption: function(key) {
