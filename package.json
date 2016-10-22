@@ -43,6 +43,7 @@
     "jquery",
     "jquery-ui",
     "sortable",
+    "draggable",
     "drag-and-drop"
   ],
   "dependencies": {
