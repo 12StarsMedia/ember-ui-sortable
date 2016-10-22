@@ -1,46 +1,53 @@
-{{#ui-sortable
-  content=model.sortable
-  moved=(action "contentMoved")
-  inserted=(action "addElement")
-  class="list-group draggable-target"
-  as |item|
-}}
-  <li class="list-group-item">{{item}}</li>
-{{/ui-sortable}}
+<div class="row">
+  <div class="col-sm-6">
+    <h3>Sortable list with additional draggable</h3>
+    {{#ui-sortable
+      content=draggableList
+      moved=(action "draggableMoved")
+      inserted=(action "addToDraggableList")
+      class="list-group draggable-target"
+      as |item|
+    }}
+      <li class="list-group-item">{{item}}</li>
+    {{/ui-sortable}}
 
-<hr>
+    <hr>
 
-<ul class="list-group">
-  {{#ui-draggable
-    connectToSortable=".draggable-target"
-    revert="invalid"
-    helper="clone"
-    appendTo="body"
-    tagName="li"
-    classNames="list-group-item"
-  }}
-    I can be dragged into the list above!
-  {{/ui-draggable}}
-</ul>
+    {{#if draggableItem}}
+      <ul class="list-group">
+        {{#ui-draggable
+          connectToSortable=".draggable-target"
+          revert="invalid"
+          helper="clone"
+          appendTo="body"
+          tagName="li"
+          classNames="list-group-item"
+        }}
+          {{draggableItem}}
+        {{/ui-draggable}}
+      </ul>
+    {{/if}}
+  </div>
+  <div class="col-sm-6">
+    <h3>Connected sortable lists</h3>
+    {{#ui-sortable
+      connectWith=".connected-list-group-bottom"
+      content=connectedListOne
+      moved=(action "contentMovedToOne")
+      class="list-group connected-list-group-top"
+      as |item|
+    }}
+        <li class="list-group-item">{{item}}</li>
+    {{/ui-sortable}}
 
-<hr>
-
-{{#ui-sortable
-  connectWith=".connected-list-group-bottom"
-  content=model.sortable
-  moved=(action "contentMoved")
-  class="list-group connected-list-group-top"
-as |item|
-}}
-    <li class="list-group-item">{{item}}</li>
-{{/ui-sortable}}
-
-{{#ui-sortable
-  connectWith=".connected-list-group-top"
-  content=model.sortable
-  moved=(action "contentMoved")
-  class="list-group connected-list-group-bottom"
-as |item|
-}}
-    <li class="list-group-item">{{item}}</li>
-{{/ui-sortable}}
+    {{#ui-sortable
+      connectWith=".connected-list-group-top"
+      content=connectedListTwo
+      moved=(action "contentMovedToTwo")
+      class="list-group connected-list-group-bottom"
+      as |item|
+    }}
+        <li class="list-group-item">{{item}}</li>
+    {{/ui-sortable}}
+  </div>
+</div>
