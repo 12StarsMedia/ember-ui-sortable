@@ -103,13 +103,17 @@ test('should update the component if an item is replaced', function(assert) {
 });
 
 test('should send the content if an item is dragged', function(assert) {
-  assert.expect(3);
+  assert.expect(4);
   this.set('people', people);
 
   this.on('moved', (item, oldIndex, newIndex) => {
+    people.removeAt(oldIndex);
+    people.insertAt(newIndex, item);
+
     assert.deepEqual(item, { name: "Han" });
     assert.equal(oldIndex, 0);
     assert.equal(newIndex, 1);
+    assert.equal(this.get('people').objectAt(newIndex).name, 'Han');
   });
 
   this.render(hbs`
@@ -117,6 +121,8 @@ test('should send the content if an item is dragged', function(assert) {
       <li>{{item.name}}</li>
     {{/ui-sortable}}
   `);
+
+  // return stop();
 
   this.$('li:eq(0)').simulate('drag', { dy: 22 });
 });
@@ -168,7 +174,7 @@ test('should not refresh after destruction', function(assert) {
   assert.ok(true, 'no error was thrown');
 });
 
-test('should update jQuery UI axis option when axis property changes', function(assert) {
+test('should update jQuery UI options when property values change', function(assert) {
   this.set('people', people);
 
   let options = {

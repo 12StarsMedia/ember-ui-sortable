@@ -43,7 +43,7 @@ export default Ember.Component.extend({
   }),
 
   initSortable: on('didInsertElement', function () {
-    let opts = {};
+    const opts = {};
 
     ['start', 'stop', 'out', 'over'].forEach((callback) => {
       opts[callback] = run.bind(this, callback);
@@ -61,11 +61,11 @@ export default Ember.Component.extend({
   }),
 
   move(oldIndex, newIndex) {
-    let content = this.get('content');
-    let moved = this.get('moved');
+    const content = this.get('content');
+    const moved = this.get('moved');
 
     if (content && moved) {
-      let item = content.objectAt(oldIndex);
+      const item = content.objectAt(oldIndex);
       return moved(item, oldIndex, newIndex);
     }
   },
@@ -87,21 +87,16 @@ export default Ember.Component.extend({
   },
 
   stop(event, ui) {
+    const item = ui.item;
+    const newIndex = ui.item.index();
+
     if(ui.item.hasClass('draggable-item')){
-      const newIndex = ui.item.index();
-      const item = ui.item;
-
       item.detach();
-
       this.$().sortable('cancel');
-
       this.attrs.inserted(item, newIndex);
     } else {
       const oldIndex = ui.item.data('oldIndex');
-      const newIndex = ui.item.index();
-
       this.$().sortable('cancel');
-
       this.move(oldIndex, newIndex);
     }
   },

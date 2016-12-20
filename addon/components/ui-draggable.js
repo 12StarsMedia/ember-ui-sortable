@@ -59,7 +59,7 @@ export default Ember.Component.extend({
     });
   }),
 
-  contentObserver: observer('content.[]', function () {
+  contentObserver: observer('content', function () {
     run.scheduleOnce('afterRender', this, this._refreshDraggable);
   }),
 
