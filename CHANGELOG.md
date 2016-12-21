@@ -1,5 +1,8 @@
 # ember-ui-sortable changelog
 
+## 0.3.3
+- Fix regression introduced in 0.3.2.
+
 ## 0.3.2
 - [#5](https://github.com/12StarsMedia/ember-ui-sortable/issues/5) Fixes DOM syncing by canceling the sortable DOM manipulation.
 
