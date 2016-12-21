@@ -2,6 +2,7 @@ import Ember from 'ember';
 import layout from '../templates/components/ui-sortable';
 
 const {
+  get,
   observer,
   on,
   run
@@ -92,11 +93,9 @@ export default Ember.Component.extend({
 
     if(ui.item.hasClass('draggable-item')){
       item.detach();
-      this.$().sortable('cancel');
       this.attrs.inserted(item, newIndex);
     } else {
       const oldIndex = ui.item.data('oldIndex');
-      this.$().sortable('cancel');
       this.move(oldIndex, newIndex);
     }
   },

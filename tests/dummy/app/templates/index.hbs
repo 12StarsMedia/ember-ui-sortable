@@ -27,6 +27,16 @@
         {{/ui-draggable}}
       </ul>
     {{/if}}
+
+  <hr>
+
+  <h4>draggableList property</h4>
+  <p>This list should stay in sync with the sortable above.</p>
+
+  {{#sorted-array content=draggableList tagName="ul" as |item|}}
+    <li>{{item}}</li>
+  {{/sorted-array}}
+
   </div>
   <div class="col-sm-6">
     <h3>Connected sortable lists</h3>
