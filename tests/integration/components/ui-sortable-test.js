@@ -22,13 +22,15 @@ test('should render the template for each item in an array', function(assert) {
   this.set('people', people);
 
   this.render(hbs`
-    {{#ui-sortable content=people as |item|}}
+    {{#ui-sortable content=people as |item index|}}
+      <span>{{index}}</span>
       <li>{{item.name}}</li>
     {{/ui-sortable}}
   `);
 
   assert.equal(this.$('li').length, 3);
   assert.equal(this.$('li').text(), 'HanLukeLeia');
+  assert.equal(this.$('span').text(), '012');
 });
 
 test('should update the component if content is replaced', function(assert) {
