@@ -110,10 +110,10 @@ test('should send the content if an item is dragged', function(assert) {
     people.removeAt(oldIndex);
     people.insertAt(newIndex, item);
 
-    assert.deepEqual(item, { name: "Han" });
-    assert.equal(oldIndex, 0);
-    assert.equal(newIndex, 1);
-    assert.equal(this.get('people').objectAt(newIndex).name, 'Han');
+    assert.deepEqual(item, { name: 'Luke' });
+    assert.equal(oldIndex, 1);
+    assert.equal(newIndex, 0);
+    assert.deepEqual(this.get('people').map(p => p.name), ['Luke', 'Han', 'Leia']);
   });
 
   this.render(hbs`
@@ -122,9 +122,7 @@ test('should send the content if an item is dragged', function(assert) {
     {{/ui-sortable}}
   `);
 
-  // return stop();
-
-  this.$('li:eq(0)').simulate('drag', { dy: 22 });
+  this.$('li:eq(1)').simulate('drag', { dy: -22 });
 });
 
 test('should become disabled if the disabled attribute is true', function(assert) {
@@ -134,9 +132,9 @@ test('should become disabled if the disabled attribute is true', function(assert
     if (this.get('disabled')) {
       assert.equal(true); // This shouldn't pass
     } else {
-      assert.deepEqual(item, { name: "Han" });
-      assert.equal(oldIndex, 0);
-      assert.equal(newIndex, 1);
+      assert.deepEqual(item, { name: "Luke" });
+      assert.equal(oldIndex, 1);
+      assert.equal(newIndex, 0);
     }
   });
   this.set('disabled', true);
@@ -147,9 +145,9 @@ test('should become disabled if the disabled attribute is true', function(assert
     {{/ui-sortable}}
   `);
 
-  this.$('li:eq(0)').simulate('drag', { dy: 22 });
+  this.$('li:eq(1)').simulate('drag', { dy: -22 });
   this.set('disabled', false);
-  this.$('li:eq(0)').simulate('drag', { dy: 22 });
+  this.$('li:eq(1)').simulate('drag', { dy: -22 });
 });
 
 test('should not refresh after destruction', function(assert) {

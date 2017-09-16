@@ -2,7 +2,6 @@ import Ember from 'ember';
 import layout from '../templates/components/ui-sortable';
 
 const {
-  get,
   observer,
   on,
   run
