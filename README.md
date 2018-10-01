@@ -2,6 +2,10 @@
 
 [![Build Status](https://travis-ci.org/12StarsMedia/ember-ui-sortable.svg?branch=master)](https://travis-ci.org/12StarsMedia/ember-ui-sortable)
 
+## DEPRECATED
+
+This plugin is no longer maintained. Please use another sorting plugin for EmberJS, like [Ember Sortable](https://emberobserver.com/addons/ember-sortable).
+
 An [Ember](http://emberjs.com) 1.13+ component for [jQuery UI's Sortable Widget](http://jqueryui.com/sortable/). This addon is a fork of [ivy-sortable](https://github.com/IvyApp/ivy-sortable).
 
 
