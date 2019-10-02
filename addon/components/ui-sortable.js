@@ -40,7 +40,7 @@ export default Ember.Component.extend({
   ],
 
   destroySortable: on('willDestroyElement', function() {
-    this.$().sortable('destroy');
+    this.element.addEventListener('destroy');
   }),
 
   initSortable: on('didInsertElement', function () {
@@ -50,7 +50,7 @@ export default Ember.Component.extend({
       opts[callback] = run.bind(this, callback);
     });
 
-    this.$().sortable(opts);
+    this.element.addEventListener(opts);
 
     this.get('uiOptions').forEach((option) => {
       this._bindSortableOption(option);
@@ -113,11 +113,11 @@ export default Ember.Component.extend({
   },
 
   _optionDidChange(sender, key) {
-    this.$().sortable('option', key, this.get(key));
+    this.element.addEventListener('option', key, this.get(key));
   },
 
   _refreshSortable() {
     if (this.isDestroying) { return; }
-    this.$().sortable('refresh');
+    this.element.addEventListener('refresh');
   }
 });

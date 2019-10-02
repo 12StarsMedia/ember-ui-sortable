@@ -42,7 +42,7 @@ export default Ember.Component.extend({
   ],
 
   destroyDraggable: on('willDestroyElement', function() {
-    this.$().draggable('destroy');
+    this.element.addEventListener('destroy');
   }),
 
   initDraggable: on('didInsertElement', function () {
@@ -52,7 +52,7 @@ export default Ember.Component.extend({
       opts[callback] = run.bind(this, callback);
     });
 
-    this.$().draggable(opts);
+    this.element.addEventListener(opts);
 
     this.get('uiOptions').forEach((option) => {
       this._bindDraggableOption(option);
@@ -80,11 +80,11 @@ export default Ember.Component.extend({
   },
 
   _optionDidChange(sender, key) {
-    this.$().draggable('option', key, this.get(key));
+    this.element.addEventListener('option', key, this.get(key));
   },
 
   _refreshDraggable() {
     if (this.isDestroying) { return; }
-    this.$().draggable('refresh');
+    this.element.addEventListener('refresh');
   }
 });
